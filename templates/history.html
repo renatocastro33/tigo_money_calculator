@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title>Transaction History</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f7f7f7;
+      }
+      h1 {
+        text-align: center;
+        color: #6610f2;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Historial de Consultas de Giros</h1>
+      <table>
+        <tr>
+          <th>ID_Consulta</th>
+          <th>Cantidad_Giro</th>
+        </tr>
+        {% for transaction in transactions %}
+        <tr>
+          <td>{{ transaction[0] }}</td>
+          <td>${{ transaction[1] }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>
