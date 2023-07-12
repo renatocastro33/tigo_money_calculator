@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>¡Simulador de Giros Tigo Money!</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f7f7f7;
+      }
+      h1 {
+        text-align: center;
+        color: #6610f2;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 16px;
+      }
+      .btn-submit {
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        background-color: #ffc107;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .btn-submit:hover {
+        background-color: #e0a800;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>¡Simula tus Giros usando Tigo Money!</h1>
+      <form method="POST" action="/">
+        <label for="amount">¡Ingresa cuanto quieres enviar!:</label>
+        <input type="number" name="amount" id="amount" step="0.01" required>
+        <input type="submit" class="btn-submit" value="Calculate">
+      </form>
+    </div>
+  </body>
+</html>
+
+
+
