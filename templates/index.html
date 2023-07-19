@@ -27,22 +27,25 @@
         font-weight: bold;
         color: white;
       }
+      .amount-symbol {
+        color: #00377D;
+        font-size: 16px; /* Adjust the font size as needed */
+        margin-right: 5px;
+      }
+
+      /* Ensure the amount-input has enough width to display the "G.s" without being cut off */
       .amount-input {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100%;
+        min-width: 120px; /* Set a minimum width for the amount-input */
         height: 50px;
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 4px;
         font-size: 24px;
         background-color: #f7f7f7;
-      }
-      .amount-symbol {
-        color: #00377D;
-        font-size: 20px;
-        margin-right: 5px;
       }
       .amount-value {
         flex: 1;
