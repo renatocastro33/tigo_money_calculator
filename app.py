@@ -29,10 +29,10 @@ def transaction_history():
     return render_template('history.html', transactions=transactions)
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET','POST'])
 def calculate_cost():
     if request.method == 'POST':
-        amount = float(request.form['amount'])
+        amount = float(request.form['amount'].replace(',',''))
         
         # Save the amount in the database
         conn = sqlite3.connect('transactions.db')
@@ -52,6 +52,9 @@ def calculate_cost():
 
         
         # Return the results to the template
-        return render_template('result.html', amount=amount, cost1=cost_app, cost2=cost_ussd, cost3=cost_otc)
+        return render_template('result.html', amount = '{0:,.2f}'.format(amount), cost1= '{0:,.2f}'.format(cost_app), cost2 = '{0:,.2f}'.format(cost_ussd), cost3 = '{0:,.2f}'.format(cost_otc),
+                saving_1 = '{0:,.2f}'.format(cost_ussd - cost_app), saving_2 = '{0:,.2f}'.format(cost_otc - cost_app)
+
+            )
     
     return render_template('index.html')

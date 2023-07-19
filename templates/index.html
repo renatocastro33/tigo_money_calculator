@@ -1,63 +1,208 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>¡Simulador de Giros Tigo Money!</title>
+    <title>Transaction Cost Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
       body {
         font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        color: #00377D;
       }
       .container {
         max-width: 400px;
         margin: 0 auto;
         padding: 20px;
-        border: 1px solid #ccc;
         border-radius: 5px;
-        background-color: #f7f7f7;
+        background-color: #00377b;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
       h1 {
         text-align: center;
-        color: #6610f2;
+        color: #00377D;
+        margin-bottom: 20px;
       }
       label {
-        display: block;
-        margin-bottom: 10px;
         font-weight: bold;
+        color: ;
       }
-      input[type="number"] {
+      .amount-input {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
+        height: 50px;
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 4px;
-        box-sizing: border-box;
-        font-size: 16px;
+        font-size: 24px;
+        background-color: #f7f7f7;
+      }
+      .amount-symbol {
+        color: #00377D;
+        font-size: 20px;
+        margin-right: 5px;
+      }
+      .amount-value {
+        flex: 1;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        font-size: 24px;
+      }
+      .calculator-buttons {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .calculator-button {
+        padding: 15px;
+        font-size: 18px;
+        text-align: center;
+        text-color: black;
+        background-color: #FABE00;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .calculator-button:hover {
+        background-color: #F0A500;
       }
       .btn-submit {
         width: 100%;
         padding: 10px;
         margin-top: 20px;
-        background-color: #ffc107;
-        color: white;
+        background-color: #FABE00;
+        color: #fff;
         border: none;
         border-radius: 4px;
         cursor: pointer;
         font-size: 16px;
       }
       .btn-submit:hover {
-        background-color: #e0a800;
+        background-color: #F0A500;
+      }
+
+      .calculator-background {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        background-color: #00377b;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>¡Simula tus Giros usando Tigo Money!</h1>
+      <div class="calculator-background">
+          <img src="https://cdn-assets-eu.frontify.com/s3/frontify-enterprise-files-eu/eyJwYXRoIjoidGlnb1wvYWNjb3VudHNcLzI4XC80MDAwMTE1XC9wcm9qZWN0c1wvOVwvYXNzZXRzXC9lZFwvMjU5N1wvNzk2OWNiMjczM2VmZjhiNzYxMzJjYjJjZWFiZTEwZjgtMTUyMDMyMTY0Ny5zdmcifQ:tigo:CdLRg-rh8PHSvddosfzuxHsHKZ8XREg9x-ywF6m5aqY?width=200" alt="Calculator Logo">
+      </div>
       <form method="POST" action="/">
-        <label for="amount">¡Ingresa cuanto quieres enviar!:</label>
-        <input type="number" name="amount" id="amount" step="0.01" required>
-        <input type="submit" class="btn-submit" value="Calculate">
+
+        <div class="form-group">
+          <label for="amount">Simula tu giro, ingresa la cantidad :</label>
+          <div class="amount-input">
+            <span class="amount-symbol">Gs</span>
+            <input type="text" name="amount" id="amount" class="amount-value" readonly>
+          </div>
+          <div class="calculator-buttons">
+            <button class="calculator-button" onclick="appendToAmount('1')">1</button>
+            <button class="calculator-button" onclick="appendToAmount('2')">2</button>
+            <button class="calculator-button" onclick="appendToAmount('3')">3</button>
+            <button class="calculator-button" onclick="appendToAmount('4')">4</button>
+            <button class="calculator-button" onclick="appendToAmount('5')">5</button>
+            <button class="calculator-button" onclick="appendToAmount('6')">6</button>
+            <button class="calculator-button" onclick="appendToAmount('7')">7</button>
+            <button class="calculator-button" onclick="appendToAmount('8')">8</button>
+            <button class="calculator-button" onclick="appendToAmount('9')">9</button>
+            <button class="calculator-button" onclick="appendToAmount('0')">0</button>
+            <button class="calculator-button" onclick="eraseLastDigit()">⌫</button>
+            <button class="calculator-button" onclick="clearAmount()">Borrar</button>
+          </div>
+        </div>
+        <input type="submit" class="btn-submit" value="Calcula tu giro!">
       </form>
     </div>
+
+    <script>
+      
+      
+      function formatAmountWithCommas(number) {
+        //const parts = number.toString().split(".");
+        //parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return (number*10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",").slice(0, -1);
+        //return parts.join(".");
+      }
+
+      function appendToAmount(value) {
+        const amountInput = document.getElementById('amount');
+        let currentAmount = amountInput.value.replace(/,/g, "");
+
+        // Handle decimal numbers
+        if (currentAmount.includes(".")) {
+          const [integerPart, decimalPart] = currentAmount.split(".");
+          currentAmount = formatAmountWithCommas(integerPart) + "." + decimalPart;
+        } else {
+          // Add the comma for every 1000 multiples
+          if (!isNaN(currentAmount)) {
+            currentAmount = formatAmountWithCommas(currentAmount);
+          }
+        }
+
+        amountInput.value = currentAmount + value;
+      }
+
+      function eraseLastDigit() {
+        const amountInput = document.getElementById('amount');
+        let currentAmount = amountInput.value.replace(/,/g, "");
+        currentAmount = currentAmount.slice(0, -1);
+        
+        // Add the comma for every 1000 multiples
+        if (!isNaN(currentAmount) && currentAmount !== "") {
+          currentAmount = formatAmountWithCommas(currentAmount);
+        }
+
+        amountInput.value = currentAmount;
+      }
+
+      function clearAmount() {
+        const amountInput = document.getElementById('amount');
+        amountInput.value = '';
+      }
+
+      function handleKeyboardInput(event) {
+        const key = event.key;
+
+        if (/^\d$/.test(key)) {
+          // If the pressed key is a digit, append it to the amount
+          appendToAmount(key);
+        } else if (key === "." && !amountInput.value.includes(".")) {
+          // If the pressed key is a dot and there's no decimal point yet, append it to the amount
+          appendToAmount(key);
+        } else if (key === "Backspace") {
+          // If the pressed key is the Backspace key, erase the last digit
+          eraseLastDigit();
+        }
+      }
+
+      const amountInput = document.getElementById('amount');
+      amountInput.addEventListener('keydown', handleKeyboardInput);
+
+      function handleFormSubmit(event) {
+      // Prevent the form submission only when the "Calcula tu giro!" button is clicked
+      if (event.submitter.classList.contains('calculator-button')) {
+        event.preventDefault(); // Prevent form submission
+        }
+      }
+
+      const form = document.querySelector('form');
+      form.addEventListener('submit', handleFormSubmit);
+
+
+
+    </script>
   </body>
 </html>
-
-
-

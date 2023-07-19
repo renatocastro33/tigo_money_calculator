@@ -1,8 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Transaction Cost Results</title>
-    <style>
+    <title>Transaction Cost Calculator - Result</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Link the new CSS file for the result page -->
+  </head>
+
+  <script>
+    function detectAndSetAppLink() {
+      const userAgent = navigator.userAgent.toLowerCase();
+
+      // Check if the user agent contains 'android' for Android devices
+      if (userAgent.includes('android')) {
+        const appLink = document.getElementById('cta-app-link');
+        appLink.href = 'https://play.google.com/store/apps/details?id=com.juvo.tigomoney&hl=es&gl=US';
+        appLink.style.backgroundColor = '#4CAF50';
+        appLink.style.backgroundImage = 'url("https://example.com/google-play-store-icon.png")';
+      }
+      // Check if the user agent contains 'iphone' or 'ipad' for iOS devices
+      else if (userAgent.includes('iphone') || userAgent.includes('ipad')) {
+        const appLink = document.getElementById('cta-app-link');
+        appLink.href = 'https://apps.apple.com/py/app/billetera-tigo-money-paraguay/id1589504689';
+        appLink.style.backgroundColor = '#007aff';
+        appLink.textContent = 'Descargá el App aquí!';
+      }
+      // For other devices (e.g., computer), leave the default link as it is
+    }
+
+    detectAndSetAppLink();
+  </script>
+
+  <style>
       body {
         font-family: Arial, sans-serif;
       }
@@ -51,26 +80,30 @@
         padding-left: 40px;
       }
     </style>
-  </head>
   <body>
     <div class="container">
-      <h1>Transaction Cost Results</h1>
-      <h3>Estas enviando: G.S {{ amount }}</h3>
-      <p>Si usas:</p>
-      <div class="cost-box">
-        <p class="cost-label">Con nuestra App te costaría:</p>
-        <p>G.S {{ cost1 }}! (¡Tú mejor opción! Te ahorras G.S {{cost2 - cost1}})</p>
-        <a href="https://tmy-py.onelink.me/MDSO" class="cta-button play-store" target="_blank">Descargá el App aquí!</a>
-        <a href="https://www.youtube.com/watch?v=9ktnNrYFtRk" class="cta-button" target="_blank">Mira cómo registrarte en Tigo Money ya!</a>
+      <h4>Estas enviando: G.s {{ amount }}</h4>
+      <div class="result-section">
+        <p class="result-label">Monto:</p>
+        <p class="result-value">{{ amount }}</p>
+
+        <div class="cost-box">
+          <p class="cost-label">Con nuestra App te costaría:</p>
+          <p>G.S {{ cost1 }}! (¡Tú mejor opción! Te ahorras G.s {{saving_1}})</p>
+          <a href="https://tmy-py.onelink.me/MDSO" class="cta-button" id="cta-app-link" target="_blank">Descargá el App aquí!</a>
+          <a href="https://www.youtube.com/watch?v=9ktnNrYFtRk" class="cta-button" target="_blank">Mira cómo registrarte en el App ya!</a>
+        </div>
+
+        <div class="cost-box">
+          <p class="cost-label">Con nuestro canal *555:</p>
+          <p>G.s {{ cost2 }}</p>
+        </div>
+        <div class="cost-box">
+          <p class="cost-label">Con nuestro canal de Agentes y Puntos Tigo Money:</p>
+          <p>G.s {{ cost3 }}</p>
+        </div>
       </div>
-      <div class="cost-box">
-        <p class="cost-label">Con muestro canal *555:</p>
-        <p>G.S {{ cost2 }}</p>
-      </div>
-      <div class="cost-box">
-        <p class="cost-label">Con nuestros Agentes y Puntos Tigo Money:</p>
-      <p>G.S {{ cost3 }}</p>
-      </div>
+      <a class="btn-back" href="/">Simula otro giro</a>
     </div>
   </body>
 </html>
