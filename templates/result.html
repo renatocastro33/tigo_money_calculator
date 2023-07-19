@@ -14,14 +14,14 @@
       // Check if the user agent contains 'android' for Android devices
       if (userAgent.includes('android')) {
         const appLink = document.getElementById('cta-app-link');
-        appLink.href = 'https://play.google.com/store/apps/details?id=com.juvo.tigomoney&hl=es&gl=US';
+        appLink.href = 'https://tmy-py.onelink.me/MDSO/08otf61h';
         appLink.style.backgroundColor = '#4CAF50';
         appLink.style.backgroundImage = 'url("https://example.com/google-play-store-icon.png")';
       }
       // Check if the user agent contains 'iphone' or 'ipad' for iOS devices
       else if (userAgent.includes('iphone') || userAgent.includes('ipad')) {
         const appLink = document.getElementById('cta-app-link');
-        appLink.href = 'https://apps.apple.com/py/app/billetera-tigo-money-paraguay/id1589504689';
+        appLink.href = 'https://tmy-py.onelink.me/MDSO/08otf61h';
         appLink.style.backgroundColor = '#007aff';
         appLink.textContent = 'Descargá el App aquí!';
       }
@@ -70,7 +70,7 @@
         text-align: center;
       }
       .cta-button:hover {
-        background-color: #e0a800;
+        background-color: #023020;
       }
       .cta-button.play-store {
         background-image: url('https://example.com/google-play-store-icon.png');
@@ -82,16 +82,14 @@
     </style>
   <body>
     <div class="container">
-      <h4>Quieres enviar</h4>
+      <h4>Quieres enviar: </h4>
+      <p class="result-value">G.s {{amount}} </p>
       <div class="result-section">
-        <p class="result-label">Monto:</p>
-        <p class="result-value">{{ amount }}</p>
-
         <div class="cost-box">
           <p class="cost-label">Con nuestra App te costaría:</p>
           <p>G.S {{ cost1 }}! (¡Tú mejor opción! Te ahorras G.s {{saving_1}})</p>
           <a href="https://tmy-py.onelink.me/MDSO" class="cta-button" id="cta-app-link" target="_blank">¡Descargá el App aquí!</a>
-          <a href="https://www.youtube.com/watch?v=9ktnNrYFtRk" class="cta-button" target="_blank">¡Mira cómo registrarte en el App ya!</a>
+          <a href="https://www.youtube.com/watch?v=9ktnNrYFtRk" class="cta-button" target="_blank">¡Mira cómo registrarte en el App!</a>
         </div>
 
         <div class="cost-box">
